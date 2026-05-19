@@ -9,9 +9,17 @@ app.use(express.json()); // Permite parsear el body de las peticiones en formato
 app.use(cors()); // Habilita CORS para permitir peticiones desde otros dominios o frontend
 
 // Simulación de base de datos en memoria
-// Aquí almacenaremos los usuarios temporalmente
 let usuarios = [];
 let nextId = 1;
+
+// ==========================================
+// Rutas de Control y Bienvenida
+// ==========================================
+
+// GET / -> Ruta inicial de bienvenida para verificar que la API está viva en Render
+app.get('/', (req, res) => {
+    res.send('¡API REST funcionando correctamente! Dirígete a /api/usuarios para ver los datos.');
+});
 
 // ==========================================
 // Rutas del CRUD (Entidad: Usuario)
@@ -108,7 +116,6 @@ app.delete('/api/usuarios/:id', (req, res) => {
 // ==========================================
 
 // Se usa process.env.PORT para que Render asigne el puerto dinámicamente en producción
-// Si no existe, usa el 3000 para desarrollo local
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
